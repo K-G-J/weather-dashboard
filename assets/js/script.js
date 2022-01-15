@@ -5,16 +5,19 @@ var daysContainerEl = document.querySelector("#days-container");
 var citySearchTerm = document.querySelector("#city-search-term");
 pastCitiesButtonsEl = document.querySelector("#past-cities-buttons");
 
-var getWeather = function(lat, lon) {
+var getWeather = function(cityname) {
     //format the OpenWeather api url 
-    var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=fb9174eee39da62906652ee7dd116b7c`
+    var apiUrl = (`api.openweathermap.org/data/2.5/forecast?q=${cityname}&units=imperial&appid=fb9174eee39da62906652ee7dd116b7c`.split("_").pop())
+    //http://127.0.0.1:5500/
+    
     //make a request to the url 
     fetch(apiUrl)
     .then(function(response) {
         // request was successful 
         if (response.ok) {
             response.json().then(function(data) {
-                displayWeather(data, city)
+                console.log(data)
+                // displayWeather(data, city)
             });
         } else {
             alert("Error: location not found!");
@@ -42,20 +45,9 @@ function initialize(event) {
                 (place.address_components[1] && place.address_components[1].short_name || ''),
                 (place.address_components[2] && place.address_components[2].short_name || '')
             ].join(' ');
-        }
-    });
-}
-function codeAddress() {
-    geocoder = new google.maps.Geocoder();
-    var address = cityInputEl.value;
-    geocoder.geocode({ 'address': address }, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            console.log("Latitude: " + results[0].geometry.location.lat());
-            console.log("Longitude: " + results[0].geometry.location.lng());
-        }
-
-        else {
-            console.log("Geocode was not successful for the following reason: " + status);
+            var cityname = (place.address_components[0] && place.address_components[0].short_name || '').split(" ").join("")
+            console.log(cityname);
+            getWeather(cityname);
         }
     });
 }
