@@ -106,7 +106,6 @@ var displayWeather = function (data, currentCity) {
     } else if (uvi >= 11) {
         uviEl.style.backgroundColor = "magenta"
     }
-    
     // 5 day forecast subtitle 
     var fiveDaysubtitle = document.createElement("h2")
     fiveDaysubtitle.textContent = "5-Day Forecast"
@@ -117,131 +116,32 @@ var displayWeather = function (data, currentCity) {
     var dayCardWrapper = document.createElement("div")
     dayCardWrapper.className = "day-card-wrapper"
     daysContainerEl.appendChild(dayCardWrapper);
-    
-    // day 1 
-    var day1Header = document.createElement("h3")
-    day1Header.textContent = `${month}, ${day + 1}`
-    day1Header.className = "card-header text-uppercase"
-    dayCardWrapper.appendChild(day1Header);
-    var day1Card = document.createElement("div")
-    day1Card.className = "day-card-body"
-    day1Header.appendChild(day1Card)
-    // weather icon image 
-    var weatherIcon1 = document.createElement("p")
-    weatherIcon1.innerHTML = `<img src='http://openweathermap.org/img/wn/${data.daily[1].weather[0].icon}@2x.png' >`
-    day1Card.appendChild(weatherIcon1)
-    // temp
-    var day1Temp = document.createElement("p")
-    day1Temp.textContent = `Temp: ${data.daily[1].temp.day}°F`
-    day1Card.appendChild(day1Temp)
-    // wind 
-    var day1Wind = document.createElement("p")
-    day1Wind.textContent = `Wind: ${data.daily[1].wind_speed} MPH` 
-    day1Card.appendChild(day1Wind)
-    // humidity 
-    var day1Humidity = document.createElement("p")
-    day1Humidity.textContent = `Humidity: ${data.daily[1].humidity}%`
-    day1Card.appendChild(day1Humidity)
-    
-    // day 2
-    var day2Header = document.createElement("h3")
-    day2Header.textContent = `${month}, ${day + 2}`
-    day2Header.className = "card-header text-uppercase"
-    dayCardWrapper.appendChild(day2Header);
-    var day2Card = document.createElement("div")
-    day2Card.className = "day-card-body"
-    day2Header.appendChild(day2Card)
-    // weather icon image 
-    var weatherIcon2 = document.createElement("p")
-    weatherIcon2.innerHTML = `<img src='http://openweathermap.org/img/wn/${data.daily[2].weather[0].icon}@2x.png' >`
-    day2Card.appendChild(weatherIcon2)
-    // temp
-    var day2Temp = document.createElement("p")
-    day2Temp.textContent = `Temp: ${data.daily[2].temp.day}°F`
-    day2Card.appendChild(day2Temp)
-    // wind 
-    var day2Wind = document.createElement("p")
-    day2Wind.textContent = `Wind: ${data.daily[2].wind_speed} MPH` 
-    day2Card.appendChild(day2Wind)
-    // humidity 
-    var day2Humidity = document.createElement("p")
-    day2Humidity.textContent = `Humidity: ${data.daily[2].humidity}%`
-    day2Card.appendChild(day2Humidity)
-
-    // day 3
-    var day3Header = document.createElement("h3")
-    day3Header.textContent = `${month}, ${day + 3}`
-    day3Header.className = "card-header text-uppercase"
-    dayCardWrapper.appendChild(day3Header);
-    var day3Card = document.createElement("div")
-    day3Card.className = "day-card-body"
-    day3Header.appendChild(day3Card)
-    // weather icon image 
-    var weatherIcon3 = document.createElement("p")
-    weatherIcon3.innerHTML = `<img src='http://openweathermap.org/img/wn/${data.daily[3].weather[0].icon}@2x.png' >`
-    day3Card.appendChild(weatherIcon3)
-    // temp
-    var day3Temp = document.createElement("p")
-    day3Temp.textContent = `Temp: ${data.daily[3].temp.day}°F`
-    day3Card.appendChild(day3Temp)
-    // wind 
-    var day3Wind = document.createElement("p")
-    day3Wind.textContent = `Wind: ${data.daily[3].wind_speed} MPH` 
-    day3Card.appendChild(day3Wind)
-    // humidity 
-    var day3Humidity = document.createElement("p")
-    day3Humidity.textContent = `Humidity: ${data.daily[3].humidity}%`
-    day3Card.appendChild(day3Humidity)
-
-    // day 4 
-    var day4Header = document.createElement("h3")
-    day4Header.textContent = `${month}, ${day + 4}`
-    day4Header.className = "card-header text-uppercase"
-    dayCardWrapper.appendChild(day4Header);
-    var day4Card = document.createElement("div")
-    day4Card.className = "day-card-body"
-    day4Header.appendChild(day4Card)
-    // weather icon image 
-    var weatherIcon4 = document.createElement("p")
-    weatherIcon4.innerHTML = `<img src='http://openweathermap.org/img/wn/${data.daily[4].weather[0].icon}@2x.png' >`
-    day4Card.appendChild(weatherIcon4)
-    // temp
-    var day4Temp = document.createElement("p")
-    day4Temp.textContent = `Temp: ${data.daily[4].temp.day}°F`
-    day4Card.appendChild(day4Temp)
-    // wind 
-    var day4Wind = document.createElement("p")
-    day4Wind.textContent = `Wind: ${data.daily[4].wind_speed} MPH` 
-    day4Card.appendChild(day4Wind)
-    // humidity 
-    var day4Humidity = document.createElement("p")
-    day4Humidity.textContent = `Humidity: ${data.daily[4].humidity}%`
-    day4Card.appendChild(day4Humidity)
-
-      // day 5
-      var day5Header = document.createElement("h3")
-      day5Header.textContent = `${month}, ${day + 5}`
-      day5Header.className = "card-header text-uppercase"
-      dayCardWrapper.appendChild(day5Header);
-      var day5Card = document.createElement("div")
-      day5Card.className = "day-card-body"
-      day5Header.appendChild(day5Card)
-      // weather icon image 
-      var weatherIcon5 = document.createElement("p")
-      weatherIcon5.innerHTML = `<img src='http://openweathermap.org/img/wn/${data.daily[5].weather[0].icon}@2x.png' >`
-      day5Card.appendChild(weatherIcon5)
-      // temp
-      var day5Temp = document.createElement("p")
-      day5Temp.textContent = `Temp: ${data.daily[5].temp.day}°F`
-      day5Card.appendChild(day5Temp)
-      // wind 
-      var day5Wind = document.createElement("p")
-      day5Wind.textContent = `Wind: ${data.daily[5].wind_speed} MPH` 
-      day5Card.appendChild(day5Wind)
-      // humidity 
-      var day5Humidity = document.createElement("p")
-      day5Humidity.textContent = `Humidity: ${data.daily[5].humidity}%`
-      day5Card.appendChild(day5Humidity)
+    // day card loop
+    for (var i=1; i<=5; i++) {
+        var dayHeader = document.createElement("h3")
+        dayHeader.textContent = `${month}, ${day + i}`
+        dayHeader.className = "card-header text-uppercase"
+        dayCardWrapper.appendChild(dayHeader);
+        var dayCard = document.createElement("div")
+        dayCard.className = "day-card-body"
+        dayHeader.appendChild(dayCard)
+        // weather icon image 
+        var weatherIcon = document.createElement("p")
+        weatherIcon.innerHTML = `<img src='http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png' >`
+        dayCard.appendChild(weatherIcon)
+        // temp
+        var dayTemp = document.createElement("p")
+        dayTemp.textContent = `Temp: ${data.daily[i].temp.day}°F`
+        dayCard.appendChild(dayTemp)
+        // wind 
+        var dayWind = document.createElement("p")
+        dayWind.textContent = `Wind: ${data.daily[i].wind_speed} MPH` 
+        dayCard.appendChild(dayWind)
+        // humidity 
+        var dayHumidity = document.createElement("p")
+        dayHumidity.textContent = `Humidity: ${data.daily[i].humidity}%`
+        dayCard.appendChild(dayHumidity)
+    }
 }
 function saveSearch(cityObj) {
     var pastSearches = loadPastSearches();
