@@ -42,7 +42,7 @@
     font-size: 1.2rem;
   }
   
-   .btn {
+  .btn {
     font-size: 1.3rem;
     text-decoration:none;
     padding: 6px 5px;
@@ -58,7 +58,7 @@
     transform: translate(-1px, -1px);
   }
   
-   .btn:hover {
+  .btn:hover {
     color: var(--primary);
     background-color: var(--tertiary);
     transform: translate(0, 0);
@@ -85,7 +85,7 @@
     font-size: 1.2rem;
   }
   
-   .btn-back:hover {
+  .btn-back:hover {
     color: var(--primary);
     background-color: var(--tertiary);
     transform: translate(0, 0);
@@ -130,26 +130,12 @@
     background-color: var(--dark);
   }
   
-  /* .status-icon {
-    padding: 2px 5px;
-    margin: 0 5px;
-    background-color: rgba(255,255,255, 1);
-    border-radius: var(--border-radius);
-  }
-  
-  .icon-danger {
-    color: rgb(255, 70, 70);
-  }
-  
-  .icon-success {
-    color: rgb(29, 153, 255);
-  } */
-  
   /* CARDS */
   .card {
     margin: 0 0 20px 0;
     border: 3px solid var(--dark);
     border-radius: var(--border-radius);
+    flex-direction: row;
   }
   
   .card-header {
@@ -158,15 +144,25 @@
     padding: 2.5%;
     border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
   }
-  
   .card-body {
     padding: 2.5%;
+    flex-direction: row;
   }
-  .day-card{
-      width: 20%;
+  .day-card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    justify-content: space-between;
+  }
+  .day-card {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px;
+      margin: 10px;
   }
   
-  /* FORM */
+ /* FORM */
   .form-label,
   .form-input,
   .form-textarea {
@@ -186,7 +182,7 @@
     border: 2px solid var(--light-dark);
     border-radius: var(--border-radius);
   }
-  
+
   /* HEIGHT / WIDTH UTILS */
   .min-100-vh {
     min-height: 100vh;
