@@ -17,14 +17,18 @@
         <div class="col-12 col-md-4">
             <div class="card">
                 <h3 class="card-header text-uppercase">Search for a City:</h3>
-                <form id="city-form" class="card-body">
-                    <label class="form-label">City Name</label>
-                    <input name="cityname" id="cityname" type="text" autofocus="true" class="form-input" />
-                    <button type="submit" class="btn">Search</button>
+                <form name='city' id="city-form" class="card-body">
+                    <label class="form-label">
+                        City Name
+                        <input name="cityname" id="cityname" type="text" autofocus class="form-input" />
+                    </label>
+                    <input type='hidden' name='address' />
+                    <button id="getCords" type='button' class="btn">Search</button>
                 </form>
             </div>
             <div class="card">
                 <h3 class="card-header text-uppercase">Recent Searches </h3>
+                <ul id='recent'></ul>
                 <div class="card-body" id="past-cities-buttons">
                     <button class="btn" data-past-cityname="past-cityname">Past City Name</button>
                 </div>
