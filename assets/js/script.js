@@ -21,6 +21,7 @@ let day = date.getDate()
 let currentDate = `${month}, ${day}`
 
 var getWeather = function(lat,lon,city) {
+    daysContainerEl.innerHTML = "";
     //format the OpenWeather api url 
     var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=fb9174eee39da62906652ee7dd116b7c`
     var currentCity = city
@@ -81,10 +82,24 @@ var codeAddress = function() {
 var displayWeather = function (data, currentCity) {
     // current forecast element 
     citySearchTerm.textContent = `${currentCity}, ${currentDate}`
+    q("#current-icon").innerHTML = `<img src='http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png' >`
     q("#current-temp").textContent = `Temp: ${data.current.temp}°F`
     q("#current-wind").textContent = `Wind: ${data.current.wind_speed} MPH`
     q("#current-humidity").textContent = `Humidity: ${data.current.humidity}%`
-    q("#current-uvi").textContent = `UVI: ${data.current.uvi}`
+    let uviEl = q("#current-uvi")
+    let uvi = Math.round(data.current.uvi)
+    uviEl.textContent = `UVI: ${data.current.uvi}`
+    if (uvi <= 2){
+        uviEl.style.backgroundColor = "green"
+    } else if (uvi >= 3 && uvi <= 5){
+        uviEl.style.backgroundColor = "yellow"
+    } else if (uvi >= 6 && uvi <= 7) {
+        uviEl.style.backgroundColor = "orange"
+    } else if (uvi >= 8 && uvi <= 10) {
+        uviEl.style.backgroundColor = "red"
+    } else if (uvi >= 11) {
+        uviEl.style.backgroundColor = "magenta"
+    }
     
     // 5 day forecast subtitle 
     var fiveDaysubtitle = document.createElement("h2")
@@ -94,7 +109,7 @@ var displayWeather = function (data, currentCity) {
     daysContainerEl.appendChild(fiveDaysubtitle);
     // day cards wrapper div 
     var dayCardWrapper = document.createElement("div")
-    dayCardWrapper.className = "card day-card"
+    dayCardWrapper.className = "day-card-wrapper"
     daysContainerEl.appendChild(dayCardWrapper);
     
     // day 1 
@@ -107,7 +122,7 @@ var displayWeather = function (data, currentCity) {
     day1Header.appendChild(day1Card)
     // weather icon image 
     var weatherIcon1 = document.createElement("p")
-    weatherIcon1.textContent = "placeholder icon 1"
+    weatherIcon1.innerHTML = `<img src='http://openweathermap.org/img/wn/${data.daily[1].weather[0].icon}@2x.png' >`
     day1Card.appendChild(weatherIcon1)
     // temp
     var day1Temp = document.createElement("p")
@@ -132,7 +147,7 @@ var displayWeather = function (data, currentCity) {
     day2Header.appendChild(day2Card)
     // weather icon image 
     var weatherIcon2 = document.createElement("p")
-    weatherIcon2.textContent = "placeholder icon 2"
+    weatherIcon2.innerHTML = `<img src='http://openweathermap.org/img/wn/${data.daily[2].weather[0].icon}@2x.png' >`
     day2Card.appendChild(weatherIcon2)
     // temp
     var day2Temp = document.createElement("p")
@@ -157,7 +172,7 @@ var displayWeather = function (data, currentCity) {
     day3Header.appendChild(day3Card)
     // weather icon image 
     var weatherIcon3 = document.createElement("p")
-    weatherIcon3.textContent = "placeholder icon 3"
+    weatherIcon3.innerHTML = `<img src='http://openweathermap.org/img/wn/${data.daily[3].weather[0].icon}@2x.png' >`
     day3Card.appendChild(weatherIcon3)
     // temp
     var day3Temp = document.createElement("p")
@@ -182,7 +197,7 @@ var displayWeather = function (data, currentCity) {
     day4Header.appendChild(day4Card)
     // weather icon image 
     var weatherIcon4 = document.createElement("p")
-    weatherIcon4.textContent = "placeholder icon 4"
+    weatherIcon4.innerHTML = `<img src='http://openweathermap.org/img/wn/${data.daily[4].weather[0].icon}@2x.png' >`
     day4Card.appendChild(weatherIcon4)
     // temp
     var day4Temp = document.createElement("p")
@@ -207,7 +222,7 @@ var displayWeather = function (data, currentCity) {
       day5Header.appendChild(day5Card)
       // weather icon image 
       var weatherIcon5 = document.createElement("p")
-      weatherIcon5.textContent = "placeholder icon 5"
+      weatherIcon5.innerHTML = `<img src='http://openweathermap.org/img/wn/${data.daily[5].weather[0].icon}@2x.png' >`
       day5Card.appendChild(weatherIcon5)
       // temp
       var day5Temp = document.createElement("p")
