@@ -10,8 +10,7 @@ const cityContainerEl = q("#city-container")
 const daysContainerEl = q("#days-container");
 const citySearchTerm = q("#city-search-term");
 const pastCitiesButtonsEl = q("#past-cities-buttons");
-const searchBtn=q('#getCords');
-const ulSearches=q('#recent');
+const searchBtn=q("#getCords");
 
 // get current date 
 const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -21,6 +20,7 @@ let day = date.getDate()
 let currentDate = `${month}, ${day}`
 
 var getWeather = function(lat,lon,city) {
+    cityInputEl.value = "";
     daysContainerEl.innerHTML = "";
     //format the OpenWeather api url 
     var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=fb9174eee39da62906652ee7dd116b7c`
@@ -73,7 +73,12 @@ var codeAddress = function() {
             var lat = results[0].geometry.location.lat();
             var lon = results[0].geometry.location.lng();
             getWeather(lat,lon,city);
-            // function call to create past city buttons 
+            var cityObj = {
+                cityname: city,
+                searched: false
+            }
+            saveSearch(cityObj)
+            makeBtn(city)
         } else {
             console.log("Geocode was not successful for the following reason: " + status);
         }
@@ -81,6 +86,7 @@ var codeAddress = function() {
 }
 var displayWeather = function (data, currentCity) {
     // current forecast element 
+    cityContainerEl.className = "card"
     citySearchTerm.textContent = `${currentCity}, ${currentDate}`
     q("#current-icon").innerHTML = `<img src='http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png' >`
     q("#current-temp").textContent = `Temp: ${data.current.temp}°F`
@@ -237,7 +243,65 @@ var displayWeather = function (data, currentCity) {
       day5Humidity.textContent = `Humidity: ${data.daily[5].humidity}%`
       day5Card.appendChild(day5Humidity)
 }
-
+function saveSearch(cityObj) {
+    var pastSearches = loadPastSearches();
+    pastSearches.push(cityObj);
+    localStorage.setItem("cityObjects", JSON.stringify(pastSearches))
+}
+function loadPastSearches() {
+    var pastSearchArr = JSON.parse(localStorage.getItem("cityObjects"));
+    if (!pastSearchArr || !Array.isArray(pastSearchArr)) return []
+    else return pastSearchArr
+}
+var makePastBtns = function() {
+    var pastCities = loadPastSearches()
+    for (var city of pastCities) {
+        var pastSearchBtn = document.createElement("button")
+        pastSearchBtn.className = "btn past-search-btn"
+        pastSearchBtn.textContent = city.cityname
+        pastCitiesButtonsEl.appendChild(pastSearchBtn);
+        pastSearchBtn.addEventListener ("click", function() {
+            geocoder = new google.maps.Geocoder();
+            var citySelection = city.cityname
+            geocoder.geocode({
+                'address': citySelection
+            }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var lat = results[0].geometry.location.lat();
+                    var lon = results[0].geometry.location.lng();
+                    getWeather(lat,lon, citySelection);
+                } else {
+                    console.log("Geocode was not successful for the following reason: " + status);
+                }
+            })
+        });
+    }
+}
+var makeBtn = function(city) {
+    var pastSearchBtn = document.createElement("button")
+    pastSearchBtn.className = "btn past-search-btn"
+    pastSearchBtn.textContent = city
+    pastCitiesButtonsEl.appendChild(pastSearchBtn);
+    pastSearchBtn.addEventListener ("click", function() {
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            'address': city
+        }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                var lat = results[0].geometry.location.lat();
+                var lon = results[0].geometry.location.lng();
+                getWeather(lat,lon,city);
+            } else {
+                console.log("Geocode was not successful for the following reason: " + status);
+            }
+        })
+    });
+}
 // event listeners 
 google.maps.event.addDomListener(window, "load", initialize);
 searchBtn.addEventListener("click", codeAddress)
+q("#clear-btn").addEventListener("click", function() {
+    [ ... qa(".past-search-btn") ].map( 
+        thisButton => thisButton.remove());
+})
+makePastBtns();
