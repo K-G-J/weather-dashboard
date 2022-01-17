@@ -65,22 +65,34 @@ var initialize = function(event) {
 var codeAddress = function() {
     geocoder = new google.maps.Geocoder();
     var city = cityInputEl.value;
-    geocoder.geocode({
-        'address': city
-    }, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            var lat = results[0].geometry.location.lat();
-            var lon = results[0].geometry.location.lng();
-            getWeather(lat,lon,city);
-            var cityObj = {
-                cityname: city,
-                searched: false
+    // check if location button already exists 
+    let alreadySearched = false;
+    let pastSearches = loadPastSearches()
+    if (pastSearches) {
+        pastSearches.forEach (c => {
+            if (c.cityname === city) {
+                alreadySearched = true;
             }
-            saveSearch(cityObj)
-        } else {
-            console.log("Geocode was not successful for the following reason: " + status);
-        }
-    });
+        })
+    }
+    // if new query 
+    if (!alreadySearched) {
+        geocoder.geocode({
+            'address': city
+        }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                var lat = results[0].geometry.location.lat();
+                var lon = results[0].geometry.location.lng();
+                getWeather(lat,lon,city);
+                var cityObj = {
+                    cityname: city
+                }
+                saveSearch(cityObj)
+            } else {
+                console.log("Geocode was not successful for the following reason: " + status);
+            }
+        });
+    }
 }
 var displayWeather = function (data, currentCity) {
     // current forecast element 
@@ -161,7 +173,7 @@ function saveSearch(cityObj) {
             }
         })
     });
-    var pastSearches = loadPastSearches();
+    var pastSearches = loadPastSearches()
     pastSearches.push(cityObj);
     localStorage.setItem("cityObjects", JSON.stringify(pastSearches))
 }
@@ -173,27 +185,27 @@ function loadPastSearches() {
 var loadPastBtns = function() {
     var pastSearches = loadPastSearches()
     for (var city of pastSearches) {
-        var pastSearchBtn = document.createElement("button")
-        pastSearchBtn.className = "btn past-search-btn"
-        pastSearchBtn.value = city.cityname
-        pastSearchBtn.textContent = city.cityname
-        pastCitiesButtonsEl.appendChild(pastSearchBtn);
-        pastSearchBtn.addEventListener ("click", function() {
-            geocoder = new google.maps.Geocoder();
-            pastCity = this.value
-            geocoder.geocode({
-                'address': pastCity
-            }, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    var lat = results[0].geometry.location.lat();
-                    var lon = results[0].geometry.location.lng();
-                    console.log(pastCity)
-                    getWeather(lat,lon,pastCity);
-                } else {
-                    console.log("Geocode was not successful for the following reason: " + status);
-                }
-            })
-        });
+            var pastSearchBtn = document.createElement("button")
+            pastSearchBtn.className = "btn past-search-btn"
+            pastSearchBtn.value = city.cityname
+            pastSearchBtn.textContent = city.cityname
+            pastCitiesButtonsEl.appendChild(pastSearchBtn);
+            pastSearchBtn.addEventListener ("click", function() {
+                geocoder = new google.maps.Geocoder();
+                pastCity = this.value
+                geocoder.geocode({
+                    'address': pastCity
+                }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var lat = results[0].geometry.location.lat();
+                        var lon = results[0].geometry.location.lng();
+                        console.log(pastCity)
+                        getWeather(lat,lon,pastCity);
+                    } else {
+                        console.log("Geocode was not successful for the following reason: " + status);
+                    }
+                })
+            });
     }
 }
 // event listeners 
