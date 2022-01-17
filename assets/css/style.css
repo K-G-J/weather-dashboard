@@ -1,9 +1,9 @@
 :root {
-    --primary: #ccdad1;
-    --secondary: #9caea9;
-    --tertiary: #788585;
-    --light-dark: #6f6866;
-    --dark: #38302e;
+    --primary: #d6cfcb;
+    --secondary: #358f80;
+    --tertiary: #248277;
+    --light-dark: #14746f;
+    --dark: #036666;
     --border-radius: .3rem;
   }
   
@@ -151,6 +151,13 @@
   }
   #current-uvi {
     width: 10%;
+    font-weight: bolder;
+  }
+  #current-icon img {
+    width: 20%;
+    display: inline-flex;
+    float: right;
+    margin-right: 4rem;
   }
   .day-card-wrapper {
     display: flex;

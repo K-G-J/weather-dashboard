@@ -86,7 +86,7 @@ var displayWeather = function (data, currentCity) {
     // current forecast element 
     cityContainerEl.className = "card"
     citySearchTerm.textContent = `${currentCity}, ${currentDate}`
-    q("#current-icon").innerHTML = `<img src='http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png' >`
+    q("#current-icon").innerHTML = `<img src='http://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png' >`
     q("#current-temp").textContent = `Temp: ${data.current.temp}°F`
     q("#current-wind").textContent = `Wind: ${data.current.wind_speed} MPH`
     q("#current-humidity").textContent = `Humidity: ${data.current.humidity}%`
