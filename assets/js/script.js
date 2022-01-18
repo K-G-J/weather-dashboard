@@ -130,7 +130,7 @@ var displayWeather = function (data, currentCity) {
     for (var i=1; i<=5; i++) {
         var dayHeader = document.createElement("h3")
         dayHeader.textContent = `${month}, ${day + i}`
-        dayHeader.className = "card-header text-uppercase"
+        dayHeader.className = "card-header text-uppercase day-card-header"
         dayCardWrapper.appendChild(dayHeader);
         var dayCard = document.createElement("div")
         dayCard.className = "day-card-body"

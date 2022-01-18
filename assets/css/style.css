@@ -137,6 +137,8 @@
     border-radius: var(--border-radius);
     flex-direction: column;
     padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
   }
   
   .card-header {
@@ -144,46 +146,75 @@
     background-color: var(--dark);
     padding: 2.5%;
     border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
   }
   .card-body {
     padding: 2.5%;
+    display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
   }
   #current-uvi {
     width: 10%;
     font-weight: bolder;
+    display: flex;
+    flex-wrap: wrap;
   }
   #current-icon img {
     width: 20%;
-    display: inline-flex;
+    display: flex;
     float: right;
     margin-right: 4rem;
+    flex-wrap: wrap;
   }
   .day-card-wrapper {
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     border: 3px solid var(--dark);
     border-radius: var(--border-radius);
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    justify-content: center;
+    width: 100%;
+  }
+  .day-card-header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 20%;
+    text-align: center;
+    border-radius: 0;
   }
   .day-card-body {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     padding: 20px;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    
   }
   .day-card {
       padding: 5px;
       margin: 10px;
       display: flex;
+      flex-wrap: wrap;
       flex-direction: row;
       font-size: large;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
   }
   .day-card-body p {
+    display: flex;
     font-size: small;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
   }
   
  /* FORM */
@@ -317,7 +348,56 @@
   .col-12 {
     flex: 0 0 100%;
   }
-  
+  @media screen and (max-width: 400px) {
+    .day-card-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      border: 3px solid var(--dark);
+      border-radius: var(--border-radius);
+      width: 100%;
+    }
+    .day-card-header {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+      border-radius: 0;
+    }
+    .day-card-body {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      text-align: center;
+      
+    }
+    .day-card {
+        padding: 5px;
+        margin: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        font-size: large;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .day-card-body p {
+      display: flex;
+      font-size: small;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+    }
+  }
+
   /* col-sm */
   @media screen and (min-width: 640px) {
     .col-sm-1 {
