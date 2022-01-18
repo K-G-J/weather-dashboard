@@ -349,6 +349,11 @@
     flex: 0 0 100%;
   }
   @media screen and (max-width: 400px) {
+    #current-icon img {
+      display: flex;
+      width: max-content;
+      flex-wrap: wrap;
+    }
     .day-card-wrapper {
       display: flex;
       flex-wrap: wrap;
