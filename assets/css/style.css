@@ -157,7 +157,7 @@
     flex-wrap: wrap;
   }
   #current-uvi {
-    width: 10%;
+    width: 15%;
     font-weight: bolder;
     display: flex;
     flex-wrap: wrap;
@@ -232,7 +232,7 @@
   }
   
   .form-input {
-    width: max-content;
+    width: 170%;
     padding: 3%;
     margin: 5px 0;
     font-size: 1.2rem;
@@ -350,7 +350,7 @@
   .col-12 {
     flex: 0 0 100%;
   }
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 420px) {
     #current-uvi {
       width: 45%;
       font-weight: bolder;
@@ -410,6 +410,74 @@
       align-items: center;
       justify-content: center;
       align-content: center;
+    }
+    .form-input {
+      width: 140%;
+    }
+  }
+  @media screen and (max-width: 900px) {
+    #current-uvi {
+      width: 45%;
+      font-weight: bolder;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 5px;
+      border-radius: var(--border-radius);
+    }
+    #current-icon img {
+      display: flex;
+      width: max-content;
+      flex-wrap: wrap;
+    }
+    .day-card-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      border: 3px solid var(--dark);
+      border-radius: var(--border-radius);
+      width: 100%;
+    }
+    .day-card-header {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+      border-radius: 0;
+    }
+    .day-card-body {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      text-align: center;
+      
+    }
+    .day-card {
+        padding: 5px;
+        margin: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        font-size: large;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .day-card-body p {
+      display: flex;
+      font-size: small;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+    }
+    .form-input {
+      width: 100%;
     }
   }
 
